@@ -5,6 +5,13 @@ resource "azurerm_storage_account" "security_storage_account" {
   account_tier              = "Standard"
   account_replication_type  = "LRS"
   enable_https_traffic_only = true
+
+  network_rules {
+    default_action             = "Deny"
+    ip_rules                   = ["<PLACEHOLDER_TRUSTED_IP_RANGE>"] # Add trusted IP ranges here
+    virtual_network_subnet_ids = ["<PLACEHOLDER_VNET_SUBNET_ID>"] # Add virtual network subnet IDs here
+  }
+
   tags = {
     git_commit           = "a1d1c1ce31a1bde6dafa188846d90eca82abe5fd"
     git_file             = "terraform/azure/mssql.tf"
@@ -245,4 +252,5 @@ resource "azurerm_mssql_server_security_alert_policy" "alertpolicy7" {
   ]
   retention_days  = 20
   email_addresses = ["securityengineer@bridgecrew.io"]
+}
 }
