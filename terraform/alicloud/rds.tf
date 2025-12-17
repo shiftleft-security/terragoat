@@ -5,6 +5,7 @@ resource "alicloud_db_instance" "seeme" {
   instance_type    = "rds.mysql.t1.small"
   instance_storage = "10"
   tde_status       = "Enabled"
+  ssl_action       = "Open"  # Enable SSL connections for enhanced security
   security_ips = [
     "0.0.0.0",
     "10.23.12.24/24"
